@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Hospital - Your Health is Our Priority</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      /* ---------- GLOBAL STYLES ---------- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* ---------- HEADER ---------- */
+      .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #4a5568, #718096);
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .logo img {
+        border-radius: 50%;
+        border: 3px solid white;
+        transition: transform 0.3s ease;
+      }
+      
+      .logo img:hover {
+        transform: scale(1.05);
+      }
+      
+      .hospital-name {
+        text-align: center;
+        flex-grow: 1;
+        padding: 0 20px;
+      }
+      
+      .hospital-name h1 {
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      
+      .hospital-name p {
+        font-size: 1.1rem;
+        font-style: italic;
+        opacity: 0.9;
+      }
+
+      /* ---------- NAVBAR ---------- */
+      header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to right, #4caf50, #2e7d32);
+        padding: 12px 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav ul {
+        list-style-type: none;
+        display: flex;
+        gap: 10px;
+      }
+      
+      header nav ul li a {
+        color: white;
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 8px 16px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        display: block;
+      }
+      
+      header nav ul li a:hover {
+        background-color: #87ceeb;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      header nav form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      header nav form input[type="text"] {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 20px;
+        width: 280px;
+        font-size: 0.95rem;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav form input[type="text"]:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #4caf50, inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav form button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        background-color: #2d3748;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      
+      header nav form button:hover {
+        background-color: #87ceeb;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+      }
+
+      .signup-signout {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .signup-signout a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .signup-signout a.signup {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .signup-signout a.signup:hover {
+        background-color: #90ee90;
+        color: #1a1a1a;
+      }
+      
+      .signup-signout a.signout {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .signup-signout a.signout:hover {
+        background-color: #ff6b6b;
+        color: white;
+      }
+
+      /* ---------- HERO SECTION ---------- */
+      .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('h1.jpeg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 100px 30px;
+        margin-bottom: 50px;
+      }
+      
+      .hero-section h2 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      
+      .hero-section p {
+        font-size: 1.3rem;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .hero-btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+      
+      .btn-primary {
+        background: linear-gradient(to right, #4caf50, #2e7d32);
+        color: white;
+      }
+      
+      .btn-primary:hover {
+        background: linear-gradient(to right, #3d8b40, #1b5e20);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+      }
+      
+      .btn-secondary:hover {
+        background: white;
+        color: #2e7d32;
+        transform: translateY(-3px);
+      }
+
+      /* ---------- MAIN CONTENT ---------- */
+      .content {
+        padding: 0 20px 50px;
+        flex: 1;
+      }
+
+      .features-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .feature-card {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+      
+      .feature-icon {
+        font-size: 3rem;
+        color: #4caf50;
+        margin-bottom: 20px;
+      }
+      
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #2e7d32;
+      }
+      
+      .feature-card p {
+        color: #666;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-bottom: 50px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .service-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      
+      .service-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+      
+      .service-content {
+        padding: 20px;
+      }
+      
+      .service-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #2e7d32;
+      }
+      
+      .service-content p {
+        color: #666;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+      
+      .service-link {
+        color: #4caf50;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: color 0.3s ease;
+      }
+      
+      .service-link:hover {
+        color: #2e7d32;
+      }
+
+      .upper-section,
+      .lower-section {
+        display: flex;
+        gap: 25px;
+        margin-bottom: 40px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .upper-section a,
+      .lower-section a {
+        flex: 1;
+        height: 250px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-align: center;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .upper-section a:before,
+      .lower-section a:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+        transition: background 0.3s ease;
+      }
+      
+      .upper-section a:hover:before,
+      .lower-section a:hover:before {
+        background: rgba(0, 0, 0, 0.2);
+      }
+      
+      .upper-section a span,
+      .lower-section a span {
+        position: relative;
+        z-index: 2;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+        padding: 0 20px;
+      }
+      
+      .upper-section a:hover span,
+      .lower-section a:hover span {
+        transform: scale(1.1);
+      }
+
+      .history {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('h3.jpeg');
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .doctors {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('h5.jpeg');
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .appointments {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('h1.jpeg');
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .facilities {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('h10.jpeg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* ---------- FOOTER ---------- */
+      .footer-main {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        padding: 50px 30px 30px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-column h3 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        color: white;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 10px;
+      }
+
+      .footer-contact p {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-contact i {
+        width: 20px;
+        text-align: center;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-hours p {
+        margin-bottom: 8px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .footer-hours .hours-highlight {
+        color: white;
+        font-weight: 600;
+      }
+
+      .social-section {
+        text-align: center;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+      
+      .social-icons a {
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: white;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .social-icons a:hover {
+        transform: translateY(-5px) scale(1.1);
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .social-icons .fa-facebook-f:hover {
+        color: #1877f2;
+      }
+      
+      .social-icons .fa-instagram:hover {
+        color: #e4405f;
+      }
+      
+      .social-icons .fa-x-twitter:hover {
+        color: #1da1f2;
+      }
+      
+      .social-icons .fa-youtube:hover {
+        color: #ff0000;
+      }
+
+      .map-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        height: 200px;
+      }
+
+      .footer-map iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .footer-bottom {
+        background-color: #2d3748;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 40px;
+      }
+
+      .footer-bottom p {
+        margin: 5px 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .footer-bottom a {
+        color: #87ceeb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-bottom a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+
+      /* ---------- RESPONSIVE DESIGN ---------- */
+      @media (max-width: 1100px) {
+        header nav {
+          flex-wrap: wrap;
+          gap: 15px;
+        }
+        
+        header nav form {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+        }
+        
+        header nav form input[type="text"] {
+          width: 60%;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero-section {
+          padding: 80px 20px;
+        }
+        
+        .hero-section h2 {
+          font-size: 2.5rem;
+        }
+        
+        .upper-section,
+        .lower-section {
+          flex-direction: column;
+        }
+        
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        
+        .footer-column {
+          text-align: center;
+        }
+        
+        .social-section {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .logo {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+        
+        .hospital-name h1 {
+          font-size: 2rem;
+        }
+        
+        header nav ul {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        
+        .hero-section h2 {
+          font-size: 2rem;
+        }
+        
+        .hero-section p {
+          font-size: 1.1rem;
+        }
+        
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .hero-btn {
+          width: 100%;
+          max-width: 250px;
+        }
+        
+        .upper-section a,
+        .lower-section a {
+          height: 180px;
+          font-size: 1.5rem;
+        }
+        
+        .features-section,
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .footer-main {
+          padding: 40px 20px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="h11.jpeg" alt="Hospital Logo" width="100" height="100" />
+
+        <div class="hospital-name">
+          <h1>City Hospital</h1>
+          <p>Your health is our priority.</p>
+        </div>
+        <img src="h12.jpeg" alt="Healthcare Image" width="100" height="100" />
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="history.html">Our History</a></li>
+          <li><a href="doctors.html">Our Doctors</a></li>
+          <li><a href="facilities.html">Our Facilities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          
+        </ul>
+        <form id="searchForm">
+          <input type="text" id="searchInput" placeholder="Search..." />
+          <button type="submit">Go</button>
+        </form>
+        <div class="signup-signout">
+          <a class="signup" href="signup.html" id="signupBtn">Sign Up</a>
+          <a class="signout" href="signout.html" id="signoutBtn">Sign Out</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="content">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <h2>Exceptional Care, Close to You</h2>
+        <p>City Hospital provides comprehensive healthcare services with state-of-the-art technology and compassionate medical professionals.</p>
+        <div class="hero-buttons">
+          <a href="appointments.html" class="hero-btn btn-primary">Book Appointment</a>
+          <a href="services.html" class="hero-btn btn-secondary">Our Services</a>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features-section">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <h3>Expert Doctors</h3>
+          <p>Our team of specialized doctors provide the highest quality medical care with years of experience.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-procedures"></i>
+          </div>
+          <h3>Advanced Technology</h3>
+          <p>We use cutting-edge medical equipment and technology for accurate diagnosis and treatment.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>24/7 Emergency</h3>
+          <p>Our emergency department is open round the clock to handle any medical emergencies.</p>
+        </div>
+      </section>
+
+      <!-- Services Preview -->
+      <section class="services-grid">
+        <div class="service-card">
+          <img src="h5.jpeg" alt="Cardiology" class="service-image">
+          <div class="service-content">
+            <h3>Cardiology</h3>
+            <p>Comprehensive heart care with advanced cardiac treatments and preventive care.</p>
+            <a href="services.html#cardiology" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <img src="h3.jpeg" alt="Orthopedics" class="service-image">
+          <div class="service-content">
+            <h3>Orthopedics</h3>
+            <p>Specialized care for bones, joints, and musculoskeletal conditions.</p>
+            <a href="services.html#orthopedics" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <img src="h10.jpeg" alt="Maternity" class="service-image">
+          <div class="service-content">
+            <h3>Maternity Care</h3>
+            <p>Complete care for mothers and babies from pregnancy to delivery.</p>
+            <a href="services.html#maternity" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <img src="h12.jpeg" alt="Emergency" class="service-image">
+          <div class="service-content">
+            <h3>Emergency Care</h3>
+            <p>24/7 emergency services with rapid response and critical care.</p>
+            <a href="services.html#emergency" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Navigation Cards -->
+      <div class="upper-section">
+        <a href="history.html" class="history">
+          <span>Our History</span>
+        </a>
+        <a href="doctors.html" class="doctors">
+          <span>Our Doctors</span>
+        </a>
+      </div>
+
+      <div class="lower-section">
+        <a href="appointments.html" class="appointments">
+          <span>Book Appointments</span>
+        </a>
+        <a href="facilities.html" class="facilities">
+          <span>Our Facilities</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-main">
+        <div class="footer-content">
+          <!-- Contact Information -->
+          <div class="footer-column footer-contact">
+            <h3>Contact Information</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Cityville, State 12345</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@cityhospital.com</p>
+            <p><i class="fas fa-ambulance"></i> Emergency: (123) 456-7891</p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+              <li><a href="services.html"><i class="fas fa-stethoscope"></i> Our Services</a></li>
+              <li><a href="doctors.html"><i class="fas fa-user-md"></i> Our Doctors</a></li>
+              <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Book Appointment</a></li>
+              <li><a href="contact.html"><i class="fas fa-phone"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Hospital Hours -->
+          <div class="footer-column footer-hours">
+            <h3>Hospital Hours</h3>
+            <p><span class="hours-highlight">Emergency Department:</span> 24/7</p>
+            <p><span class="hours-highlight">Outpatient Services:</span> 8:00 AM - 6:00 PM</p>
+            <p><span class="hours-highlight">Visiting Hours:</span> 10:00 AM - 8:00 PM</p>
+            <p><span class="hours-highlight">Pharmacy:</span> 7:00 AM - 9:00 PM</p>
+          </div>
+
+          <!-- Social Media & Map -->
+          <div class="footer-column social-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+              <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-x-twitter"></i>
+              </a>
+              <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+            
+            <div class="map-container footer-map" style="margin-top: 20px;">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.553865221734!2d80.02272857476697!3d9.669988990429473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afe543ec2d8f2d7%3A0xe7c58b9082e57de2!2sTeaching%20Hospital%2C%20Jaffna!5e0!3m2!1sen!2slk!4v1730463456789!5m2!1sen!2slk"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Hospital Location"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 City Hospital. All rights reserved.</p>
+          <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Sitemap</a> | 
+            <a href="#">Accessibility</a>
+          </p>
+          <p>Accredited by Joint Commission International</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ---------------- JAVASCRIPT ---------------- -->
+    <script>
+      // 1️⃣ Search bar functionality
+      document.getElementById("searchForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const query = document.getElementById("searchInput").value.trim();
+        if (query === "") {
+          alert("Please type something to search!");
+        } else {
+          alert(`Searching for: "${query}"\n\nThis feature would connect to a search database in a real application.`);
+        }
+      });
+
+    
+
+      // 4️⃣ Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // 5️⃣ Add loading animation to main content links
+      const mainContentLinks = document.querySelectorAll('.upper-section a, .lower-section a, .service-link, .hero-btn');
+      mainContentLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Add a simple loading indicator for demonstration
+          const originalText = this.textContent;
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+          
+          // Reset after a short delay (simulating page load)
+          setTimeout(() => {
+            this.textContent = originalText;
+          }, 1500);
+        });
+      });
+
+      // 6️⃣ Add current year to footer copyright
+      document.addEventListener('DOMContentLoaded', function() {
+        const yearElement = document.querySelector('.footer-bottom p');
+        if (yearElement) {
+          const currentYear = new Date().getFullYear();
+          yearElement.innerHTML = yearElement.innerHTML.replace('2024', currentYear);
+        }
+      });
+
+      // 7️⃣ Add animation to feature cards on scroll
+      const featureCards = document.querySelectorAll('.feature-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      featureCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>

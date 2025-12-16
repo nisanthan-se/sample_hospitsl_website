@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctors - City Hospital</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      /* ---------- GLOBAL STYLES ---------- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* ---------- HEADER ---------- */
+      .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #4a5568, #718096);
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .logo img {
+        border-radius: 50%;
+        border: 3px solid white;
+        transition: transform 0.3s ease;
+      }
+      
+      .logo img:hover {
+        transform: scale(1.05);
+      }
+      
+      .hospital-name {
+        text-align: center;
+        flex-grow: 1;
+        padding: 0 20px;
+      }
+      
+      .hospital-name h1 {
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      
+      .hospital-name p {
+        font-size: 1.1rem;
+        font-style: italic;
+        opacity: 0.9;
+      }
+
+      /* ---------- NAVBAR ---------- */
+      header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to right, #4caf50, #2e7d32);
+        padding: 12px 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav ul {
+        list-style-type: none;
+        display: flex;
+        gap: 10px;
+      }
+      
+      header nav ul li a {
+        color: white;
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 8px 16px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        display: block;
+      }
+      
+      header nav ul li a:hover {
+        background-color: #87ceeb;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      header nav form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      header nav form input[type="text"] {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 20px;
+        width: 280px;
+        font-size: 0.95rem;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav form input[type="text"]:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #4caf50, inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav form button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        background-color: #2d3748;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      
+      header nav form button:hover {
+        background-color: #87ceeb;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+      }
+
+      .signup-signout {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .signup-signout a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .signup-signout a.signup {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .signup-signout a.signup:hover {
+        background-color: #90ee90;
+        color: #1a1a1a;
+      }
+      
+      .signup-signout a.signout {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .signup-signout a.signout:hover {
+        background-color: #ff6b6b;
+        color: white;
+      }
+
+      /* ---------- DOCTORS CONTENT ---------- */
+      .content {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        flex: 1;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .page-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+      
+      .page-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .department-filter {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 40px;
+      }
+      
+      .filter-btn {
+        padding: 10px 20px;
+        background: white;
+        border: 2px solid #4caf50;
+        border-radius: 25px;
+        color: #2e7d32;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: #4caf50;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .doctors-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+
+      .doctor-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+      }
+      
+      .doctor-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .doctor-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-bottom: 3px solid #4caf50;
+      }
+
+      .doctor-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #4caf50;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .doctor-content {
+        padding: 25px;
+      }
+      
+      .doctor-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+        color: #2e7d32;
+      }
+      
+      .doctor-specialty {
+        color: #4caf50;
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: block;
+      }
+      
+      .doctor-experience {
+        color: #666;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+      }
+      
+      .doctor-education {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .doctor-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      
+      .skill-tag {
+        background: #e8f5e8;
+        color: #2e7d32;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .doctor-actions {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .action-btn {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      
+      .btn-primary {
+        background: linear-gradient(to right, #4caf50, #2e7d32);
+        color: white;
+      }
+      
+      .btn-primary:hover {
+        background: linear-gradient(to right, #3d8b40, #1b5e20);
+        transform: translateY(-2px);
+      }
+      
+      .btn-secondary {
+        background: #f1f1f1;
+        color: #333;
+      }
+      
+      .btn-secondary:hover {
+        background: #e0e0e0;
+        transform: translateY(-2px);
+      }
+
+      .stats-section {
+        background: white;
+        border-radius: 10px;
+        padding: 40px;
+        margin-bottom: 50px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+      }
+      
+      .stat-item {
+        text-align: center;
+      }
+      
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2e7d32;
+        display: block;
+      }
+      
+      .stat-label {
+        color: #666;
+        font-size: 1rem;
+      }
+
+      .appointment-cta {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .appointment-cta h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+      }
+      
+      .appointment-cta p {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .cta-btn {
+        display: inline-block;
+        padding: 15px 30px;
+        background: white;
+        color: #4caf50;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+      
+      .cta-btn:hover {
+        background: #f8f8f8;
+        transform: scale(1.05);
+      }
+
+      /* ---------- FOOTER ---------- */
+      .footer-main {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        padding: 50px 30px 30px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-column h3 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        color: white;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 10px;
+      }
+
+      .footer-contact p {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-contact i {
+        width: 20px;
+        text-align: center;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-hours p {
+        margin-bottom: 8px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .footer-hours .hours-highlight {
+        color: white;
+        font-weight: 600;
+      }
+
+      .social-section {
+        text-align: center;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+      
+      .social-icons a {
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: white;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .social-icons a:hover {
+        transform: translateY(-5px) scale(1.1);
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .social-icons .fa-facebook-f:hover {
+        color: #1877f2;
+      }
+      
+      .social-icons .fa-instagram:hover {
+        color: #e4405f;
+      }
+      
+      .social-icons .fa-x-twitter:hover {
+        color: #1da1f2;
+      }
+      
+      .social-icons .fa-youtube:hover {
+        color: #ff0000;
+      }
+
+      .map-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        height: 200px;
+      }
+
+      .footer-map iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .footer-bottom {
+        background-color: #2d3748;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 40px;
+      }
+
+      .footer-bottom p {
+        margin: 5px 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .footer-bottom a {
+        color: #87ceeb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-bottom a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+
+      /* ---------- RESPONSIVE DESIGN ---------- */
+      @media (max-width: 1100px) {
+        header nav {
+          flex-wrap: wrap;
+          gap: 15px;
+        }
+        
+        header nav form {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+        }
+        
+        header nav form input[type="text"] {
+          width: 60%;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .page-header {
+          padding: 20px;
+        }
+        
+        .page-header h2 {
+          font-size: 2rem;
+        }
+        
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        
+        .footer-column {
+          text-align: center;
+        }
+        
+        .social-section {
+          order: -1;
+        }
+        
+        .doctor-actions {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header nav {
+          flex-direction: column;
+          padding: 15px;
+        }
+        
+        header nav ul {
+          margin-bottom: 15px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        
+        header nav ul li {
+          margin: 5px;
+        }
+        
+        header nav form {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+        
+        header nav form input[type="text"] {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .logo {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+        
+        .hospital-name h1 {
+          font-size: 2rem;
+        }
+        
+        .content {
+          padding: 20px 15px;
+        }
+        
+        .doctors-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .stats-section {
+          padding: 30px 20px;
+        }
+        
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .appointment-cta {
+          padding: 30px 20px;
+        }
+        
+        .footer-main {
+          padding: 40px 20px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="h11.jpeg" alt="Hospital Logo" width="100" height="100" />
+
+        <div class="hospital-name">
+          <h1>City Hospital</h1>
+          <p>Your health is our priority.</p>
+        </div>
+        <img src="h12.jpeg" alt="Healthcare Image" width="100" height="100" />
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="history.html">Our History</a></li>
+          <li><a href="doctors.html">Our Doctors</a></li>
+          <li><a href="facilities.html">Our Facilities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <form id="searchForm">
+          <input type="text" id="searchInput" placeholder="Search..." />
+          <button type="submit">Go</button>
+        </form>
+        <div class="signup-signout">
+          <a class="signup" href="signup.html" id="signupBtn">Sign Up</a>
+          <a class="signout" href="signout.html" id="signoutBtn">Sign Out</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <h2>Meet Our Expert Doctors</h2>
+        <p>Our team of highly qualified medical professionals is dedicated to providing you with the best healthcare experience.</p>
+      </div>
+
+      <div class="department-filter">
+        <button class="filter-btn active" data-department="all">All Doctors</button>
+        <button class="filter-btn" data-department="cardiology">Cardiology</button>
+        <button class="filter-btn" data-department="orthopedics">Orthopedics</button>
+        <button class="filter-btn" data-department="neurology">Neurology</button>
+        <button class="filter-btn" data-department="pediatrics">Pediatrics</button>
+        <button class="filter-btn" data-department="surgery">Surgery</button>
+      </div>
+
+      <div class="doctors-grid">
+        <!-- Cardiology Doctors -->
+        <div class="doctor-card" data-department="cardiology">
+          <img src="h5.jpeg" alt="Dr. Sarah Smith" class="doctor-image">
+          <div class="doctor-badge">Cardiology</div>
+          <div class="doctor-content">
+            <h3>Dr. Sarah Smith</h3>
+            <span class="doctor-specialty">Senior Cardiologist</span>
+            <p class="doctor-experience">15+ years of experience</p>
+            <p class="doctor-education">MD, Cardiology - Harvard Medical School</p>
+            <div class="doctor-skills">
+              <span class="skill-tag">Heart Surgery</span>
+              <span class="skill-tag">Angioplasty</span>
+              <span class="skill-tag">Cardiac Rehabilitation</span>
+            </div>
+            <div class="doctor-actions">
+              <a href="appointments.html" class="action-btn btn-primary">
+                <i class="fas fa-calendar-check"></i> Book Appointment
+              </a>
+              <button class="action-btn btn-secondary view-profile">
+                <i class="fas fa-user-md"></i> View Profile
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orthopedics Doctors -->
+        <div class="doctor-card" data-department="orthopedics">
+          <img src="h3.jpeg" alt="Dr. Michael Johnson" class="doctor-image">
+          <div class="doctor-badge">Orthopedics</div>
+          <div class="doctor-content">
+            <h3>Dr. Michael Johnson</h3>
+            <span class="doctor-specialty">Orthopedic Surgeon</span>
+            <p class="doctor-experience">12+ years of experience</p>
+            <p class="doctor-education">MD, Orthopedic Surgery - Johns Hopkins University</p>
+            <div class="doctor-skills">
+              <span class="skill-tag">Joint Replacement</span>
+              <span class="skill-tag">Sports Medicine</span>
+              <span class="skill-tag">Spinal Surgery</span>
+            </div>
+            <div class="doctor-actions">
+              <a href="appointments.html" class="action-btn btn-primary">
+                <i class="fas fa-calendar-check"></i> Book Appointment
+              </a>
+              <button class="action-btn btn-secondary view-profile">
+                <i class="fas fa-user-md"></i> View Profile
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Neurology Doctors -->
+        <div class="doctor-card" data-department="neurology">
+          <img src="h10.jpeg" alt="Dr. Emily Williams" class="doctor-image">
+          <div class="doctor-badge">Neurology</div>
+          <div class="doctor-content">
+            <h3>Dr. Emily Williams</h3>
+            <span class="doctor-specialty">Neurology Specialist</span>
+            <p class="doctor-experience">10+ years of experience</p>
+            <p class="doctor-education">MD, Neurology - Stanford University</p>
+            <div class="doctor-skills">
+              <span class="skill-tag">Stroke Treatment</span>
+              <span class="skill-tag">Epilepsy</span>
+              <span class="skill-tag">Neurological Disorders</span>
+            </div>
+            <div class="doctor-actions">
+              <a href="appointments.html" class="action-btn btn-primary">
+                <i class="fas fa-calendar-check"></i> Book Appointment
+              </a>
+              <button class="action-btn btn-secondary view-profile">
+                <i class="fas fa-user-md"></i> View Profile
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pediatrics Doctors -->
+        <div class="doctor-card" data-department="pediatrics">
+          <img src="h12.jpeg" alt="Dr. James Brown" class="doctor-image">
+          <div class="doctor-badge">Pediatrics</div>
+          <div class="doctor-content">
+            <h3>Dr. James Brown</h3>
+            <span class="doctor-specialty">Pediatrician</span>
+            <p class="doctor-experience">8+ years of experience</p>
+            <p class="doctor-education">MD, Pediatrics - Boston Children's Hospital</p>
+            <div class="doctor-skills">
+              <span class="skill-tag">Child Healthcare</span>
+              <span class="skill-tag">Vaccinations</span>
+              <span class="skill-tag">Growth Monitoring</span>
+            </div>
+            <div class="doctor-actions">
+              <a href="appointments.html" class="action-btn btn-primary">
+                <i class="fas fa-calendar-check"></i> Book Appointment
+              </a>
+              <button class="action-btn btn-secondary view-profile">
+                <i class="fas fa-user-md"></i> View Profile
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Surgery Doctors -->
+        <div class="doctor-card" data-department="surgery">
+          <img src="h1.jpeg" alt="Dr. Robert Wilson" class="doctor-image">
+          <div class="doctor-badge">Surgery</div>
+          <div class="doctor-content">
+            <h3>Dr. Robert Wilson</h3>
+            <span class="doctor-specialty">General Surgeon</span>
+            <p class="doctor-experience">14+ years of experience</p>
+            <p class="doctor-education">MD, General Surgery - Mayo Clinic</p>
+            <div class="doctor-skills">
+              <span class="skill-tag">Laparoscopic Surgery</span>
+              <span class="skill-tag">Trauma Surgery</span>
+              <span class="skill-tag">Minimally Invasive</span>
+            </div>
+            <div class="doctor-actions">
+              <a href="appointments.html" class="action-btn btn-primary">
+                <i class="fas fa-calendar-check"></i> Book Appointment
+              </a>
+              <button class="action-btn btn-secondary view-profile">
+                <i class="fas fa-user-md"></i> View Profile
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cardiology Doctors -->
+        <div class="doctor-card" data-department="cardiology">
+          <img src="h14.jpeg" alt="Dr. Lisa Anderson" class="doctor-image">
+          <div class="doctor-badge">Cardiology</div>
+          <div class="doctor-content">
+            <h3>Dr. Lisa Anderson</h3>
+            <span class="doctor-specialty">Cardiologist</span>
+            <p class="doctor-experience">9+ years of experience</p>
+            <p class="doctor-education">MD, Cardiology - Cleveland Clinic</p>
+            <div class="doctor-skills">
+              <span class="skill-tag">Cardiac Imaging</span>
+              <span class="skill-tag">Heart Failure</span>
+              <span class="skill-tag">Preventive Cardiology</span>
+            </div>
+            <div class="doctor-actions">
+              <a href="appointments.html" class="action-btn btn-primary">
+                <i class="fas fa-calendar-check"></i> Book Appointment
+              </a>
+              <button class="action-btn btn-secondary view-profile">
+                <i class="fas fa-user-md"></i> View Profile
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <h3 style="color: #2e7d32; margin-bottom: 20px; font-size: 1.8rem;">Our Medical Team Statistics</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number" id="doctorCount">50+</span>
+            <span class="stat-label">Qualified Doctors</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="experienceCount">300+</span>
+            <span class="stat-label">Years of Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="specialtyCount">15+</span>
+            <span class="stat-label">Medical Specialties</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="patientCount">50,000+</span>
+            <span class="stat-label">Happy Patients</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="appointment-cta">
+        <h3>Ready to Book Your Appointment?</h3>
+        <p>Schedule a consultation with one of our expert doctors today and take the first step towards better health.</p>
+        <a href="appointments.html" class="cta-btn">Book Appointment Now</a>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-main">
+        <div class="footer-content">
+          <!-- Contact Information -->
+          <div class="footer-column footer-contact">
+            <h3>Contact Information</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Cityville, State 12345</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@cityhospital.com</p>
+            <p><i class="fas fa-ambulance"></i> Emergency: (123) 456-7891</p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+              <li><a href="services.html"><i class="fas fa-stethoscope"></i> Our Services</a></li>
+              <li><a href="doctors.html"><i class="fas fa-user-md"></i> Our Doctors</a></li>
+              <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Book Appointment</a></li>
+              <li><a href="contact.html"><i class="fas fa-phone"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Hospital Hours -->
+          <div class="footer-column footer-hours">
+            <h3>Hospital Hours</h3>
+            <p><span class="hours-highlight">Emergency Department:</span> 24/7</p>
+            <p><span class="hours-highlight">Outpatient Services:</span> 8:00 AM - 6:00 PM</p>
+            <p><span class="hours-highlight">Visiting Hours:</span> 10:00 AM - 8:00 PM</p>
+            <p><span class="hours-highlight">Pharmacy:</span> 7:00 AM - 9:00 PM</p>
+          </div>
+
+          <!-- Social Media & Map -->
+          <div class="footer-column social-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+              <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-x-twitter"></i>
+              </a>
+              <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+            
+            <div class="map-container footer-map" style="margin-top: 20px;">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.553865221734!2d80.02272857476697!3d9.669988990429473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afe543ec2d8f2d7%3A0xe7c58b9082e57de2!2sTeaching%20Hospital%2C%20Jaffna!5e0!3m2!1sen!2slk!4v1730463456789!5m2!1sen!2slk"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Hospital Location"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 City Hospital. All rights reserved.</p>
+          <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Sitemap</a> | 
+            <a href="#">Accessibility</a>
+          </p>
+          <p>Accredited by Joint Commission International</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ---------------- JAVASCRIPT ---------------- -->
+    <script>
+      // 1️⃣ Search bar functionality
+      document.getElementById("searchForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const query = document.getElementById("searchInput").value.trim();
+        if (query === "") {
+          alert("Please type something to search!");
+        } else {
+          alert(`Searching for doctors: "${query}"`);
+        }
+      });
+
+     
+
+      // 4️⃣ Department filter functionality
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const doctorCards = document.querySelectorAll('.doctor-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          const department = this.getAttribute('data-department');
+          
+          // Filter doctor cards
+          doctorCards.forEach(card => {
+            if (department === 'all' || card.getAttribute('data-department') === department) {
+              card.style.display = 'block';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+              }, 100);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(20px)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+
+      // 5️⃣ View profile functionality
+      document.querySelectorAll('.view-profile').forEach(button => {
+        button.addEventListener('click', function() {
+          const doctorName = this.closest('.doctor-card').querySelector('h3').textContent;
+          const doctorSpecialty = this.closest('.doctor-card').querySelector('.doctor-specialty').textContent;
+          
+          alert(`Doctor Profile: ${doctorName}\nSpecialty: ${doctorSpecialty}\n\nFull profile page coming soon!`);
+        });
+      });
+
+      // 6️⃣ Animated statistics counter
+      function animateStats() {
+        const doctorCount = document.getElementById('doctorCount');
+        const experienceCount = document.getElementById('experienceCount');
+        const specialtyCount = document.getElementById('specialtyCount');
+        const patientCount = document.getElementById('patientCount');
+        
+        const statsSection = document.querySelector('.stats-section');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Animate doctor count
+              animateNumber(doctorCount, 0, 50, 2000);
+              // Animate experience count
+              animateNumber(experienceCount, 0, 300, 2000);
+              // Animate specialty count
+              animateNumber(specialtyCount, 0, 15, 2000);
+              // Animate patient count
+              animateNumber(patientCount, 0, 50, 2000);
+              
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        
+        observer.observe(statsSection);
+      }
+      
+      function animateNumber(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const value = Math.floor(progress * (end - start) + start);
+          element.textContent = value + '+';
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+
+      // 7️⃣ Add current year to footer copyright
+      document.addEventListener('DOMContentLoaded', function() {
+        const yearElement = document.querySelector('.footer-bottom p');
+        if (yearElement) {
+          const currentYear = new Date().getFullYear();
+          yearElement.innerHTML = yearElement.innerHTML.replace('2024', currentYear);
+        }
+        
+        // Initialize stats animation
+        animateStats();
+        
+        // Add initial animation to doctor cards
+        doctorCards.forEach((card, index) => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+      });
+    </script>
+  </body>
+</html>

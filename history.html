@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our History - City Hospital</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      /* ---------- GLOBAL STYLES ---------- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* ---------- HEADER ---------- */
+      .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #4a5568, #718096);
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .logo img {
+        border-radius: 50%;
+        border: 3px solid white;
+        transition: transform 0.3s ease;
+      }
+      
+      .logo img:hover {
+        transform: scale(1.05);
+      }
+      
+      .hospital-name {
+        text-align: center;
+        flex-grow: 1;
+        padding: 0 20px;
+      }
+      
+      .hospital-name h1 {
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      
+      .hospital-name p {
+        font-size: 1.1rem;
+        font-style: italic;
+        opacity: 0.9;
+      }
+
+      /* ---------- NAVBAR ---------- */
+      header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to right, #4caf50, #2e7d32);
+        padding: 12px 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav ul {
+        list-style-type: none;
+        display: flex;
+        gap: 10px;
+      }
+      
+      header nav ul li a {
+        color: white;
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 8px 16px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        display: block;
+      }
+      
+      header nav ul li a:hover {
+        background-color: #87ceeb;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      header nav form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      header nav form input[type="text"] {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 20px;
+        width: 280px;
+        font-size: 0.95rem;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav form input[type="text"]:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #4caf50, inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      header nav form button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        background-color: #2d3748;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      
+      header nav form button:hover {
+        background-color: #87ceeb;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+      }
+
+      .signup-signout {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .signup-signout a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .signup-signout a.signup {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .signup-signout a.signup:hover {
+        background-color: #90ee90;
+        color: #1a1a1a;
+      }
+      
+      .signup-signout a.signout {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .signup-signout a.signout:hover {
+        background-color: #ff6b6b;
+        color: white;
+      }
+
+      /* ---------- MAIN CONTENT ---------- */
+      .content {
+        background-color: #f8f8f8;
+        padding: 40px 20px;
+        min-height: 70vh;
+        flex: 1;
+      }
+
+      /* ---------- HISTORY PAGE SPECIFIC STYLES ---------- */
+      .history-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      .history-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .history-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        background-color: #4caf50;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+      }
+
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .timeline-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        right: -13px;
+        background-color: white;
+        border: 4px solid #4caf50;
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .left {
+        left: 0;
+      }
+
+      .right {
+        left: 50%;
+      }
+
+      .right::after {
+        left: -13px;
+      }
+
+      .timeline-content {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      }
+
+      .timeline-content h3 {
+        margin-top: 0;
+        color: #2e7d32;
+        font-size: 1.5rem;
+        border-bottom: 2px solid #4caf50;
+        padding-bottom: 10px;
+      }
+
+      .timeline-content p {
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .milestone-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin: 10px 0;
+        border: 3px solid #4caf50;
+      }
+
+      .history-stats {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin: 40px 0;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 20px;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2e7d32;
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        color: #666;
+      }
+
+      /* ---------- FOOTER ---------- */
+      .footer-main {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        padding: 50px 30px 30px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-column h3 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        color: white;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 10px;
+      }
+
+      .footer-contact p {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-contact i {
+        width: 20px;
+        text-align: center;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-hours p {
+        margin-bottom: 8px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .footer-hours .hours-highlight {
+        color: white;
+        font-weight: 600;
+      }
+
+      .social-section {
+        text-align: center;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+      
+      .social-icons a {
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: white;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .social-icons a:hover {
+        transform: translateY(-5px) scale(1.1);
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .social-icons .fa-facebook-f:hover {
+        color: #1877f2;
+      }
+      
+      .social-icons .fa-instagram:hover {
+        color: #e4405f;
+      }
+      
+      .social-icons .fa-x-twitter:hover {
+        color: #1da1f2;
+      }
+      
+      .social-icons .fa-youtube:hover {
+        color: #ff0000;
+      }
+
+      .map-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        height: 200px;
+      }
+
+      .footer-map iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .footer-bottom {
+        background-color: #2d3748;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 40px;
+      }
+
+      .footer-bottom p {
+        margin: 5px 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .footer-bottom a {
+        color: #87ceeb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-bottom a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+
+      /* ---------- RESPONSIVE DESIGN ---------- */
+      @media (max-width: 1100px) {
+        header nav {
+          flex-wrap: wrap;
+          gap: 15px;
+        }
+        
+        header nav form {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+        }
+        
+        header nav form input[type="text"] {
+          width: 60%;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .history-header {
+          padding: 20px;
+        }
+        
+        .history-header h1 {
+          font-size: 2rem;
+        }
+        
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        
+        .footer-column {
+          text-align: center;
+        }
+        
+        .social-section {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .timeline::after {
+          left: 31px;
+        }
+        
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+        
+        .timeline-item::after {
+          left: 18px;
+        }
+        
+        .right {
+          left: 0%;
+        }
+        
+        .history-stats {
+          flex-direction: column;
+        }
+        
+        .stat-item {
+          margin-bottom: 20px;
+        }
+        
+        header nav {
+          flex-direction: column;
+          padding: 15px;
+        }
+        
+        header nav ul {
+          margin-bottom: 15px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        
+        header nav ul li {
+          margin: 5px;
+        }
+        
+        header nav form {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+        
+        header nav form input[type="text"] {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .logo {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+        
+        .hospital-name h1 {
+          font-size: 2rem;
+        }
+        
+        .content {
+          padding: 20px 15px;
+        }
+        
+        .footer-main {
+          padding: 40px 20px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="h11.jpeg" alt="Hospital Logo" width="100" height="100" />
+
+        <div class="hospital-name">
+          <h1>City Hospital</h1>
+          <p>Your health is our priority.</p>
+        </div>
+        <img src="h12.jpeg" alt="Healthcare Image" width="100" height="100" />
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="history.html" style="background-color: #87ceeb; color: #1a1a1a;">Our History</a></li>
+          <li><a href="doctors.html">Our Doctors</a></li>
+          <li><a href="facilities.html">Our Facilities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <form id="searchForm">
+          <input type="text" id="searchInput" placeholder="Search..." />
+          <button type="submit">Go</button>
+        </form>
+        <div class="signup-signout">
+          <a class="signup" href="signup.html" id="signupBtn">Sign Up</a>
+          <a class="signout" href="signout.html" id="signoutBtn">Sign Out</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="content">
+      <div class="history-header">
+        <h1>Our History</h1>
+        <p>Over 50 years of dedicated healthcare service to our community. From our humble beginnings to becoming a leading medical institution, our commitment to patient care has never wavered.</p>
+      </div>
+
+      <div class="history-stats">
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Years of Service</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">200+</span>
+          <span class="stat-label">Medical Professionals</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Hospital Beds</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">1M+</span>
+          <span class="stat-label">Patients Treated</span>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <h3>1970 - Foundation</h3>
+            <img src="h3.jpeg" alt="Hospital Foundation" class="milestone-image">
+            <p>City Hospital was founded by Dr. Robert Johnson with a vision to provide quality healthcare to the growing community. Starting with just 20 beds and 5 physicians, we began our journey of healing and care.</p>
+          </div>
+        </div>
+        <div class="timeline-item right">
+          <div class="timeline-content">
+            <h3>1985 - Expansion</h3>
+            <img src="h5.jpeg" alt="Hospital Expansion" class="milestone-image">
+            <p>We expanded our facilities to include a new surgical wing and maternity ward, increasing our capacity to 100 beds. This expansion allowed us to serve more patients with specialized care.</p>
+          </div>
+        </div>
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <h3>1995 - Technology Advancement</h3>
+            <img src="h10.jpeg" alt="Medical Technology" class="milestone-image">
+            <p>City Hospital became one of the first in the region to implement electronic medical records and advanced diagnostic equipment, revolutionizing patient care and treatment accuracy.</p>
+          </div>
+        </div>
+        <div class="timeline-item right">
+          <div class="timeline-content">
+            <h3>2005 - Cardiac Center</h3>
+            <img src="h1.jpeg" alt="Cardiac Center" class="milestone-image">
+            <p>We established a state-of-the-art Cardiac Center, offering advanced heart care services including cardiac surgery, angioplasty, and comprehensive rehabilitation programs.</p>
+          </div>
+        </div>
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <h3>2015 - Research Institute</h3>
+            <img src="h14.jpeg" alt="Research Institute" class="milestone-image">
+            <p>The City Hospital Research Institute was founded, focusing on innovative treatments for chronic diseases and collaborating with international medical research centers.</p>
+          </div>
+        </div>
+        <div class="timeline-item right">
+          <div class="timeline-content">
+            <h3>2020 - Pandemic Response</h3>
+            <img src="h12.jpeg" alt="Pandemic Response" class="milestone-image">
+            <p>During the global health crisis, City Hospital served as a regional response center, treating over 5,000 patients and implementing innovative telehealth services that continue today.</p>
+          </div>
+        </div>
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <h3>2024 - Present Day</h3>
+            <img src="h11.jpeg" alt="Modern Hospital" class="milestone-image">
+            <p>Today, City Hospital stands as a 500-bed facility with over 200 specialized physicians, offering comprehensive healthcare services and continuing our legacy of excellence in patient care.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-main">
+        <div class="footer-content">
+          <!-- Contact Information -->
+          <div class="footer-column footer-contact">
+            <h3>Contact Information</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Cityville, State 12345</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@cityhospital.com</p>
+            <p><i class="fas fa-ambulance"></i> Emergency: (123) 456-7891</p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+              <li><a href="services.html"><i class="fas fa-stethoscope"></i> Our Services</a></li>
+              <li><a href="doctors.html"><i class="fas fa-user-md"></i> Our Doctors</a></li>
+              <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Book Appointment</a></li>
+              <li><a href="contact.html"><i class="fas fa-phone"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Hospital Hours -->
+          <div class="footer-column footer-hours">
+            <h3>Hospital Hours</h3>
+            <p><span class="hours-highlight">Emergency Department:</span> 24/7</p>
+            <p><span class="hours-highlight">Outpatient Services:</span> 8:00 AM - 6:00 PM</p>
+            <p><span class="hours-highlight">Visiting Hours:</span> 10:00 AM - 8:00 PM</p>
+            <p><span class="hours-highlight">Pharmacy:</span> 7:00 AM - 9:00 PM</p>
+          </div>
+
+          <!-- Social Media & Map -->
+          <div class="footer-column social-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+              <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-x-twitter"></i>
+              </a>
+              <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+            
+            <div class="map-container footer-map" style="margin-top: 20px;">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.553865221734!2d80.02272857476697!3d9.669988990429473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afe543ec2d8f2d7%3A0xe7c58b9082e57de2!2sTeaching%20Hospital%2C%20Jaffna!5e0!3m2!1sen!2slk!4v1730463456789!5m2!1sen!2slk"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Hospital Location"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 City Hospital. All rights reserved.</p>
+          <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Sitemap</a> | 
+            <a href="#">Accessibility</a>
+          </p>
+          <p>Accredited by Joint Commission International</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ---------------- JAVASCRIPT ---------------- -->
+    <script>
+      // 1️⃣ Search bar functionality
+      document.getElementById("searchForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const query = document.getElementById("searchInput").value.trim();
+        if (query === "") {
+          alert("Please type something to search!");
+        } else {
+          alert(`Searching for: "${query}"`);
+        }
+      });
+
+
+      // 4️⃣ Timeline animation on scroll
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      timelineItems.forEach(item => {
+        observer.observe(item);
+      });
+
+      // 5️⃣ Animate statistics counter
+      function animateStats() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const statsSection = document.querySelector('.history-stats');
+        
+        const statsObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              statNumbers.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                  current += increment;
+                  if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                  }
+                  stat.textContent = Math.floor(current) + (stat.textContent.includes('+') ? '+' : '');
+                }, 30);
+              });
+              statsObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        
+        statsObserver.observe(statsSection);
+      }
+      
+      // Initialize stats animation when page loads
+      window.addEventListener('load', animateStats);
+
+      // 6️⃣ Add current year to footer copyright
+      document.addEventListener('DOMContentLoaded', function() {
+        const yearElement = document.querySelector('.footer-bottom p');
+        if (yearElement) {
+          const currentYear = new Date().getFullYear();
+          yearElement.innerHTML = yearElement.innerHTML.replace('2024', currentYear);
+        }
+      });
+    </script>
+  </body>
+</html>
